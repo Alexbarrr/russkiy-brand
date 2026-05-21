@@ -1,43 +1,58 @@
-# Astro Starter Kit: Minimal
+# Русский бренд
 
-```sh
-npm create astro@latest -- --template minimal
+Медиа о российских брендах: истории создателей, интервью, обзоры и новости индустрии.
+
+Сделано на [Astro](https://astro.build) + Tailwind CSS v4 + MDX. Деплой через GitHub Actions на GitHub Pages.
+
+## Запуск локально
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Открыть [http://localhost:4321](http://localhost:4321).
 
-## 🚀 Project Structure
+## Как добавить статью
 
-Inside of your Astro project, you'll see the following folders and files:
+1. Создайте `.md` или `.mdx` файл в нужной папке:
+   - `src/content/stories/` — истории брендов
+   - `src/content/interviews/` — интервью с основателями
+   - `src/content/reviews/` — обзоры и подборки
+   - `src/content/news/` — новости индустрии
+2. Заполните frontmatter:
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+   ```markdown
+   ---
+   title: "Заголовок"
+   description: "Короткое описание для превью и SEO"
+   pubDate: 2026-05-21
+   author: "Имя автора"
+   cover: "/covers/название-картинки.svg"
+   coverAlt: "Описание обложки"
+   tags: ["тег1", "тег2"]
+   draft: false
+   ---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+   Текст статьи в Markdown.
+   ```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+3. Положите обложку в `public/covers/`.
+4. Закоммитьте и запушьте — деплой произойдёт автоматически.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Структура
 
-## 🧞 Commands
+- `src/pages/` — страницы и маршруты
+- `src/layouts/` — общие шаблоны
+- `src/components/` — переиспользуемые блоки
+- `src/content/` — статьи в Markdown
+- `src/content.config.ts` — схемы коллекций
+- `src/consts.ts` — общие константы (название, рубрики)
 
-All commands are run from the root of the project, from a terminal:
+## Команды
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Команда           | Что делает                       |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Запустить dev-сервер             |
+| `npm run build`   | Собрать прод-версию в `./dist/`  |
+| `npm run preview` | Предпросмотр собранной версии    |
