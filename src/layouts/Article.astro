@@ -1,0 +1,91 @@
+---
+import Layout from './Layout.astro';
+import { CATEGORIES, type CategoryId } from '../consts';
+
+interface Props {
+  category: CategoryId;
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  cover?: string;
+  coverAlt?: string;
+  tags?: string[];
+}
+
+const {
+  category,
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author,
+  cover,
+  coverAlt,
+  tags = [],
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const formatted = new Intl.DateTimeFormat('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(pubDate);
+---
+
+<Layout title={title} description={description} image={cover} type="article" pubDate={pubDate}>
+  <article class="max-w-3xl mx-auto px-6 pt-12 pb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-4 flex items-center gap-3">
+      <a
+        href={`${base}/${category}/`}
+        class="text-accent hover:underline"
+      >
+        {CATEGORIES[category].hint}
+      </a>
+      <span class="w-1 h-1 rounded-full bg-muted"></span>
+      <time datetime={pubDate.toISOString()}>{formatted}</time>
+    </div>
+
+    <h1 class="font-serif text-4xl md:text-5xl leading-[1.1] tracking-tight text-ink">
+      {title}
+    </h1>
+    <p class="mt-4 text-xl text-ink-2 leading-relaxed">{description}</p>
+
+    <div class="mt-6 text-sm text-muted">
+      <span>{author}</span>
+      {updatedDate && (
+        <>
+          <span class="mx-2">·</span>
+          <span>обновлено {new Intl.DateTimeFormat('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          }).format(updatedDate)}</span>
+        </>
+      )}
+    </div>
+
+    {cover && (
+      <img
+        src={cover}
+        alt={coverAlt ?? ''}
+        class="w-full aspect-[16/9] object-cover rounded-md mt-10 mb-10"
+      />
+    )}
+
+    <div class="prose mt-10">
+      <slot />
+    </div>
+
+    {tags.length > 0 && (
+      <div class="mt-12 pt-6 border-t border-line flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span class="text-xs uppercase tracking-wider text-muted bg-cream-2 rounded-full px-3 py-1">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </article>
+</Layout>

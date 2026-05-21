@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d3a2e"/>
+      <stop offset="1" stop-color="#14110f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <g opacity="0.15" stroke="#faf7f2" stroke-width="1" fill="none">
+    <circle cx="900" cy="200" r="80"/>
+    <circle cx="900" cy="200" r="120"/>
+    <circle cx="900" cy="200" r="160"/>
+  </g>
+  <text x="80" y="380" font-family="Georgia, serif" font-size="120" font-weight="500" fill="#faf7f2">Чайная</text>
+  <text x="80" y="510" font-family="Georgia, serif" font-size="120" font-style="italic" fill="#d4a574">мастерская</text>
+  <line x1="80" y1="560" x2="240" y2="560" stroke="#d4a574" stroke-width="2"/>
+  <text x="80" y="600" font-family="Inter, sans-serif" font-size="20" fill="#a89380" letter-spacing="4">КОСТРОМА · С 2015 ГОДА</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf7f2"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#e6dfd2" stroke-width="2"/>
+  <text x="600" y="270" font-family="Georgia, serif" font-size="84" font-weight="500" fill="#14110f" text-anchor="middle">Русский</text>
+  <text x="600" y="370" font-family="Georgia, serif" font-size="84" font-style="italic" fill="#8b1a1a" text-anchor="middle">бренд</text>
+  <text x="600" y="470" font-family="Inter, sans-serif" font-size="24" fill="#8a8278" text-anchor="middle">медиа о российских брендах</text>
+</svg>

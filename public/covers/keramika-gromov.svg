@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#e8ddc8"/>
+  <g opacity="0.4">
+    <ellipse cx="900" cy="450" rx="180" ry="40" fill="#8b1a1a"/>
+    <path d="M 750 450 Q 750 250 900 250 Q 1050 250 1050 450 Z" fill="#8b1a1a"/>
+  </g>
+  <text x="80" y="280" font-family="Inter, sans-serif" font-size="18" fill="#8b1a1a" letter-spacing="6">ИНТЕРВЬЮ</text>
+  <text x="80" y="400" font-family="Georgia, serif" font-size="110" font-weight="500" fill="#14110f">Илья</text>
+  <text x="80" y="520" font-family="Georgia, serif" font-size="110" font-style="italic" fill="#8b1a1a">Громов</text>
+  <line x1="80" y1="570" x2="240" y2="570" stroke="#14110f" stroke-width="2"/>
+  <text x="80" y="620" font-family="Inter, sans-serif" font-size="20" fill="#3d3a36">керамическая студия в Петербурге</text>
+</svg>

@@ -1,0 +1,51 @@
+---
+import { CATEGORIES, type CategoryId } from '../consts';
+
+interface Props {
+  category: CategoryId;
+  slug: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  cover?: string;
+  large?: boolean;
+}
+
+const { category, slug, title, description, pubDate, cover, large = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const href = `${base}/${category}/${slug}/`;
+const formatted = new Intl.DateTimeFormat('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(pubDate);
+---
+
+<a
+  href={href}
+  class={`group block border-b border-line pb-8 hover:opacity-90 transition-opacity ${large ? 'md:pb-12' : ''}`}
+>
+  {cover && (
+    <div class={`mb-5 overflow-hidden rounded-md bg-cream-2 ${large ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+      <img
+        src={cover}
+        alt=""
+        class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="flex items-center gap-3 text-xs uppercase tracking-widest text-muted mb-2">
+    <span class="text-accent">{CATEGORIES[category].hint}</span>
+    <span class="w-1 h-1 rounded-full bg-muted"></span>
+    <time datetime={pubDate.toISOString()}>{formatted}</time>
+  </div>
+  <h3
+    class={`font-serif text-ink leading-tight tracking-tight group-hover:text-accent transition-colors ${large ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'}`}
+  >
+    {title}
+  </h3>
+  <p class={`mt-2 text-ink-2 leading-relaxed ${large ? 'text-lg' : 'text-base'}`}>
+    {description}
+  </p>
+</a>

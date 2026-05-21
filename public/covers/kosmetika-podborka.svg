@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#faf7f2"/>
+  <g>
+    <rect x="700" y="200" width="80" height="400" fill="#8b1a1a"/>
+    <rect x="820" y="280" width="80" height="320" fill="#d4a574"/>
+    <rect x="940" y="160" width="80" height="440" fill="#2d3a2e"/>
+    <rect x="1060" y="240" width="80" height="360" fill="#8b1a1a" opacity="0.5"/>
+  </g>
+  <text x="80" y="260" font-family="Inter, sans-serif" font-size="18" fill="#8b1a1a" letter-spacing="6">ПОДБОРКА · 10 БРЕНДОВ</text>
+  <text x="80" y="400" font-family="Georgia, serif" font-size="100" font-weight="500" fill="#14110f">Российская</text>
+  <text x="80" y="520" font-family="Georgia, serif" font-size="100" font-style="italic" fill="#8b1a1a">косметика</text>
+  <line x1="80" y1="570" x2="240" y2="570" stroke="#14110f" stroke-width="2"/>
+  <text x="80" y="620" font-family="Inter, sans-serif" font-size="20" fill="#3d3a36">которую стоит знать</text>
+</svg>

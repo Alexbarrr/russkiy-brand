@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#8b1a1a"/>
+  <g opacity="0.2" stroke="#faf7f2" stroke-width="1" fill="none">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="700" x2="1200" y2="700"/>
+  </g>
+  <text x="80" y="180" font-family="Inter, sans-serif" font-size="18" fill="#faf7f2" letter-spacing="6">НОВОСТИ ИНДУСТРИИ</text>
+  <text x="80" y="380" font-family="Georgia, serif" font-size="100" font-weight="500" fill="#faf7f2">Новая</text>
+  <text x="80" y="500" font-family="Georgia, serif" font-size="100" font-style="italic" fill="#faf7f2">ассоциация</text>
+  <text x="80" y="620" font-family="Georgia, serif" font-size="100" font-weight="500" fill="#faf7f2">брендов</text>
+  <line x1="80" y1="660" x2="240" y2="660" stroke="#faf7f2" stroke-width="2"/>
+  <text x="80" y="710" font-family="Inter, sans-serif" font-size="20" fill="#faf7f2" opacity="0.7">российские марки одежды объединяются</text>
+</svg>
