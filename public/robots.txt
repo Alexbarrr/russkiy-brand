@@ -1,4 +1,3 @@
+# Раздел закрыт от индексации поисковыми роботами.
 User-agent: *
-Allow: /
-
-Sitemap: https://alexbarrr.github.io/russkiy-brand/sitemap-index.xml
+Disallow: /
