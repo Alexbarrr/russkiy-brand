@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Ornament from '../components/Ornament.astro';
+import Divider from '../components/Divider.astro';
+
+// Styleboard + minimal UI-kit for the «Русский бренд» section.
+// Base direction: editorial (the 60/25/15 synthesis). Flip the switcher to
+// preview imperial / soviet — every swatch below reads from live CSS tokens.
+
+const palette = [
+  { name: 'ink', hex: '#14110f', role: 'основной текст', dark: true },
+  { name: 'ink-2', hex: '#3d3a36', role: 'вторичный текст', dark: true },
+  { name: 'cream', hex: '#faf7f2', role: 'фон', dark: false },
+  { name: 'cream-2', hex: '#f0ebe1', role: 'подложки', dark: false },
+  { name: 'accent', hex: '#8b1a1a', role: 'бордо — статусный акцент', dark: true },
+  { name: 'accent-soft', hex: '#b0413e', role: 'бордо светлый', dark: true },
+  { name: 'gold', hex: '#9a7b3f', role: 'матовое золото (имперское)', dark: true },
+  { name: 'muted', hex: '#8a8278', role: 'служебный', dark: true },
+  { name: 'line', hex: '#e6dfd2', role: 'линии, рамки', dark: false },
+];
+
+const type = [
+  { role: 'Заголовочный сериф', font: 'Cormorant Garamond', cls: 'font-serif', sample: 'Истории брендов' },
+  { role: 'Интерфейсный гротеск', font: 'Inter', cls: 'font-sans', sample: 'Текст карточек и интерфейса' },
+  { role: 'Акцентный (рубрикаторы)', font: 'Oswald', cls: 'font-[var(--font-display)] uppercase tracking-[0.18em]', sample: 'Спецпроект · Обзоры' },
+];
+---
+
+<Layout title="Стайлборд" description="Визуальная система раздела «Русский бренд»: палитра, типографика, декор, UI-kit.">
+  <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+
+    <!-- Title -->
+    <div class="mb-4 flex items-center gap-3">
+      <span class="brand-badge">Стайлборд</span>
+      <span class="eyebrow text-muted">визуальная система · базовое направление — редакционное</span>
+    </div>
+    <h1 class="font-serif text-5xl md:text-6xl tracking-tight text-ink leading-[1.05]">
+      Русский <span class="italic text-accent">бренд</span> — система оформления
+    </h1>
+    <p class="mt-5 text-lg text-ink-2 max-w-2xl leading-relaxed">
+      Одна страница со всеми носителями стиля раздела. Переключатель внизу меняет направление —
+      имперское и советское наследуют ту же структуру, меняя только токены.
+    </p>
+
+    <!-- 1. Палитра -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">01 · Палитра</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        {palette.map((c) => (
+          <div class="framed bg-cream-2/40 p-3">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+            <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <div
+              class="h-16 w-full mb-3 border border-line"
+              style={`background: var(--color-${c.name});`}
+            ></div>
+            <div class="eyebrow text-ink">{c.name}</div>
+            <div class="text-xs text-muted mt-0.5 tabular-nums">{c.hex}</div>
+            <div class="text-xs text-ink-2 mt-1 leading-snug">{c.role}</div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-4 text-sm text-muted">
+        Молочный фон · чернильный текст · бордо точечно · золото матовое, только в имперском.
+        Красный не доминирует.
+      </p>
+    </section>
+
+    <!-- 2. Типографика -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">02 · Типографика</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="space-y-6">
+        {type.map((t) => (
+          <div class="grid md:grid-cols-[200px_1fr] gap-4 md:items-baseline border-b border-line pb-6">
+            <div>
+              <div class="eyebrow text-accent">{t.role}</div>
+              <div class="text-sm text-muted mt-1">{t.font}</div>
+            </div>
+            <div class={`text-3xl text-ink ${t.cls}`}>{t.sample}</div>
+          </div>
+        ))}
+      </div>
+      <!-- scale -->
+      <div class="mt-10 space-y-4">
+        <div class="eyebrow text-muted">Шкала заголовков</div>
+        <div class="font-serif text-ink tracking-tight leading-[1.05] text-5xl md:text-7xl">Заголовок H1 · 72px</div>
+        <div class="font-serif text-ink tracking-tight leading-tight text-3xl md:text-4xl">Главный материал · 36px</div>
+        <div class="font-serif text-ink tracking-tight leading-tight text-xl md:text-2xl">Заголовок карточки · 24px</div>
+        <p class="text-lg text-ink-2 leading-relaxed max-w-2xl">
+          Текст материала, 18px. Измеренная строка 45–75 знаков, межстрочный 1.75 —
+          благородно и читаемо в цифре, без театральности.
+        </p>
+        <div class="eyebrow text-muted">Рубрикатор / kicker · Oswald 0.72rem</div>
+      </div>
+    </section>
+
+    <!-- 3. Декоративные элементы -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">03 · Декоративные элементы</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="border border-line p-5 flex flex-col items-center gap-3 bg-cream-2/30">
+          <div class="h-40 w-14 text-accent opacity-70 overflow-hidden">
+            <Ornament kind="rail" id="sg" class="w-full h-full" />
+          </div>
+          <div class="eyebrow text-ink">Боковое поле</div>
+          <div class="text-xs text-muted text-center">кружево, тайлится по высоте</div>
+        </div>
+        <div class="border border-line p-5 flex flex-col items-center justify-center gap-3 bg-cream-2/30">
+          <Ornament kind="rosette" class="w-10 h-10 text-accent" />
+          <div class="eyebrow text-ink">Розетка / медальон</div>
+          <div class="text-xs text-muted text-center">разделители, ось</div>
+        </div>
+        <div class="border border-line p-5 flex flex-col items-center justify-center gap-3 bg-cream-2/30">
+          <Ornament kind="mark" class="w-12 h-12 text-accent" />
+          <div class="eyebrow text-ink">Знак (слот под лого)</div>
+          <div class="text-xs text-muted text-center">монолитный, 1 цвет</div>
+        </div>
+        <div class="border border-line p-5 flex flex-col items-center justify-center gap-3 bg-cream-2/30">
+          <div class="w-full h-6 text-accent opacity-60 overflow-hidden">
+            <Ornament kind="scallop" id="sg2" class="w-full h-full" />
+          </div>
+          <div class="eyebrow text-ink">Ажурная кромка</div>
+          <div class="text-xs text-muted text-center">верх/низ на мобильном</div>
+        </div>
+      </div>
+      <div class="mt-6">
+        <div class="eyebrow text-muted mb-3">Разделитель блоков</div>
+        <Divider />
+      </div>
+    </section>
+
+    <!-- 4. Бейджи и метки -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">04 · Бейджи и метки</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="brand-badge">Спецпроект</span>
+        <span class="brand-badge">Истории</span>
+        <span class="brand-badge">Интервью</span>
+        <span class="brand-badge brand-badge--ghost">Редакционная подборка</span>
+        <span class="eyebrow text-accent">Рубрикатор</span>
+      </div>
+    </section>
+
+    <!-- 5. Карточки -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">05 · Карточки</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- с обложкой -->
+        <a href="#" class="group framed block bg-cream-2/40 hover:bg-cream-2/70 transition-colors p-5">
+          <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+          <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          <div class="mb-5 aspect-[4/3] bg-accent/90 flex items-center justify-center">
+            <Ornament kind="mark" class="w-12 h-12 text-cream opacity-80" />
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="brand-badge">Истории</span>
+            <time class="text-xs text-muted tracking-wide">18 мая 2026 г.</time>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl text-ink leading-tight tracking-tight group-hover:text-accent transition-colors">
+            Как чайная мастерская из Костромы стала всероссийской
+          </h3>
+          <p class="mt-2 text-base text-ink-2 leading-relaxed">
+            История бренда: от трёх кулажей на кухне до магазинов в десяти городах.
+          </p>
+          <span class="eyebrow mt-4 inline-flex items-center gap-1.5 text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+            Читать <span aria-hidden="true">→</span>
+          </span>
+        </a>
+        <!-- без обложки -->
+        <a href="#" class="group framed block bg-cream-2/40 hover:bg-cream-2/70 transition-colors p-5">
+          <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+          <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="brand-badge">Обзоры</span>
+            <time class="text-xs text-muted tracking-wide">16 мая 2026 г.</time>
+          </div>
+          <h3 class="font-serif text-xl md:text-2xl text-ink leading-tight tracking-tight group-hover:text-accent transition-colors">
+            10 российских косметических брендов, которые стоит знать
+          </h3>
+          <p class="mt-2 text-base text-ink-2 leading-relaxed">
+            Подборка отечественной косметики — от уходовых линеек до нишевой парфюмерии.
+          </p>
+          <span class="eyebrow mt-4 inline-flex items-center gap-1.5 text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+            Читать <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+      <p class="mt-4 text-sm text-muted">Наведи на карточку: уголки рамки светлеют, появляется «Читать →».</p>
+    </section>
+
+    <!-- 6. Ссылки и кнопки -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">06 · Ссылки и кнопки</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="text-sm border border-line hover:border-accent hover:text-accent transition-colors rounded-full px-4 py-2 text-ink-2 cursor-pointer">
+          Истории брендов
+        </span>
+        <a href="#" class="text-accent underline decoration-1 underline-offset-4">Текстовая ссылка</a>
+        <span class="eyebrow inline-flex items-center gap-1.5 text-accent cursor-pointer">
+          Читать <span aria-hidden="true">→</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- 7. Направления -->
+    <section class="mt-16">
+      <div class="mb-7 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">07 · Три направления</span>
+        <Divider class="flex-1" />
+      </div>
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="border border-line p-5 bg-cream-2/30">
+          <div class="eyebrow text-accent">Редакционный · база</div>
+          <p class="text-sm text-ink-2 mt-2 leading-snug">60/25/15. Сдержанное кружево, бордо, спокойный ритм.</p>
+        </div>
+        <div class="border border-line p-5 bg-cream-2/30">
+          <div class="eyebrow text-accent">Имперский</div>
+          <p class="text-sm text-ink-2 mt-2 leading-snug">Тёплая бумага, матовое золото, винный, плотнее декор.</p>
+        </div>
+        <div class="border border-line p-5 bg-cream-2/30">
+          <div class="eyebrow text-accent">Советский</div>
+          <p class="text-sm text-ink-2 mt-2 leading-snug">Графит, контраст, плакатный красный, геометрия.</p>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-muted">Сравнить вживую — переключатель внизу страницы.</p>
+    </section>
+
+  </div>
+</Layout>
