@@ -1,0 +1,8 @@
+---
+import Ornament from './Ornament.astro';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<div class={`titul-rule ${cls}`} aria-hidden="true">
+  <Ornament kind="rosette" class="w-6 h-6 shrink-0 opacity-90" />
+</div>

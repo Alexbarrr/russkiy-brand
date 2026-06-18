@@ -7,11 +7,57 @@
   --color-cream-2: #f0ebe1;
   --color-accent: #8b1a1a;
   --color-accent-soft: #b0413e;
+  --color-gold: #9a7b3f;
   --color-muted: #8a8278;
   --color-line: #e6dfd2;
 
   --font-serif: "Cormorant Garamond", "PT Serif", Georgia, serif;
   --font-sans: "Inter", "PT Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Oswald", "PT Sans Narrow", "Inter", sans-serif;
+}
+
+/* ----------------------------------------------------------------------------
+   Brand directions — switchable mood systems for the «Русский бренд» section.
+   Override the theme tokens at runtime via html[data-dir]. Source order places
+   these after @theme so they win the cascade on :root-level tokens.
+
+   editorial  — 60% editorial / 25% imperial / 15% soviet (default synthesis)
+   imperial   — статус, симметрия, матовое золото, плотный орнамент
+   soviet     — контраст, графика, плакатный красный, геометрия
+---------------------------------------------------------------------------- */
+:root {
+  --ornament: var(--color-line);
+  --ornament-strong: var(--color-accent);
+  --ornament-opacity: 0.6;
+  --rail-display: none;
+}
+
+[data-dir="imperial"] {
+  --color-cream: #f7f1e4;
+  --color-cream-2: #ede2cd;
+  --color-ink: #1b1611;
+  --color-ink-2: #463d31;
+  --color-accent: #6d1414;
+  --color-accent-soft: #8a2b27;
+  --color-line: #ddccae;
+  --color-muted: #8d8169;
+  --ornament: #c4ad82;
+  --ornament-strong: var(--color-gold);
+  --ornament-opacity: 0.85;
+}
+
+[data-dir="soviet"] {
+  --color-cream: #f4f2ec;
+  --color-cream-2: #e7e2d6;
+  --color-ink: #161616;
+  --color-ink-2: #34322e;
+  --color-accent: #c2161b;
+  --color-accent-soft: #d8392f;
+  --color-line: #d8d2c4;
+  --color-muted: #807a70;
+  --ornament: #161616;
+  --ornament-strong: #c2161b;
+  --ornament-opacity: 0.9;
 }
 
 html {
@@ -36,6 +82,144 @@ a {
   text-decoration: none;
 }
 
+/* ----------------------------------------------------------------------------
+   Decorative system
+---------------------------------------------------------------------------- */
+
+/* Branded side rails — vertical openwork (вологодское кружево) framing the page.
+   Hidden by default; shown as fixed gutters on wide screens. */
+.brand-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--rail-w, 56px);
+  display: var(--rail-display);
+  color: var(--ornament);
+  opacity: var(--ornament-opacity);
+  pointer-events: none;
+  z-index: 5;
+}
+.brand-rail svg { display: block; height: 100%; width: 100%; }
+.brand-rail--left { left: 0; }
+.brand-rail--right { right: 0; }
+
+/* Fades so the lace dissolves into the page top/bottom. */
+.brand-rail::before,
+.brand-rail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 96px;
+  z-index: 1;
+}
+.brand-rail::before { top: 0; background: linear-gradient(var(--color-cream), transparent); }
+.brand-rail::after { bottom: 0; background: linear-gradient(transparent, var(--color-cream)); }
+
+@media (min-width: 1280px) {
+  :root { --rail-display: block; }
+}
+
+/* Eyebrow / kicker — constructivist condensed label */
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  font-size: 0.72rem;
+}
+
+/* Section title with flanking ornamental rules */
+.titul-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--ornament-strong);
+}
+.titul-rule::before,
+.titul-rule::after {
+  content: "";
+  flex: 1;
+  height: 0;
+  border-top: 1px solid currentColor;
+  box-shadow: 0 3px 0 -2px currentColor; /* double-rule effect */
+  opacity: 0.7;
+}
+
+/* Constructivist category badge */
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  font-size: 0.66rem;
+  line-height: 1;
+  padding: 0.42em 0.7em;
+  color: var(--color-cream);
+  background: var(--color-accent);
+}
+.brand-badge--ghost {
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+/* Framed card — antiqua corner brackets */
+.framed { position: relative; }
+.framed .corner {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 0 solid var(--ornament-strong);
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+.framed .corner-tl { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+.framed .corner-tr { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
+.framed .corner-bl { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.framed .corner-br { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+/* Imperial direction leans on the framing; soviet trades it for solid blocks */
+[data-dir="soviet"] .brand-badge { border-radius: 0; }
+[data-dir="imperial"] .brand-badge { letter-spacing: 0.2em; }
+
+/* Direction switcher */
+.dir-switch {
+  position: fixed;
+  z-index: 40;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--color-ink);
+  border-radius: 999px;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.18);
+}
+.dir-switch button {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.64rem;
+  font-weight: 500;
+  color: #cfc6b8;
+  padding: 0.45em 0.9em;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.dir-switch button[aria-pressed="true"] {
+  color: var(--color-ink);
+  background: var(--color-cream);
+}
+
+/* ----------------------------------------------------------------------------
+   Article prose (unchanged baseline)
+---------------------------------------------------------------------------- */
 .prose {
   max-width: 68ch;
   font-size: 1.125rem;

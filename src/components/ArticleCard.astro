@@ -14,6 +14,8 @@ interface Props {
 const { category, slug, title, description, pubDate, cover, large = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const href = `${base}/${category}/${slug}/`;
+// Covers are stored with the production base baked in; rebase for any deploy path.
+const coverSrc = cover?.replace('/russkiy-brand', base);
 const formatted = new Intl.DateTimeFormat('ru-RU', {
   day: 'numeric',
   month: 'long',
@@ -23,23 +25,29 @@ const formatted = new Intl.DateTimeFormat('ru-RU', {
 
 <a
   href={href}
-  class={`group block border-b border-line pb-8 hover:opacity-90 transition-opacity ${large ? 'md:pb-12' : ''}`}
+  class={`group framed block bg-cream-2/40 hover:bg-cream-2/70 transition-colors ${large ? 'p-6 md:p-8' : 'p-5'}`}
 >
+  <span class="corner corner-tl"></span>
+  <span class="corner corner-tr"></span>
+  <span class="corner corner-bl"></span>
+  <span class="corner corner-br"></span>
+
   {cover && (
-    <div class={`mb-5 overflow-hidden rounded-md bg-cream-2 ${large ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+    <div class={`mb-5 overflow-hidden bg-cream-2 ${large ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
       <img
-        src={cover}
+        src={coverSrc}
         alt=""
         class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
         loading="lazy"
       />
     </div>
   )}
-  <div class="flex items-center gap-3 text-xs uppercase tracking-widest text-muted mb-2">
-    <span class="text-accent">{CATEGORIES[category].hint}</span>
-    <span class="w-1 h-1 rounded-full bg-muted"></span>
-    <time datetime={pubDate.toISOString()}>{formatted}</time>
+
+  <div class="flex items-center gap-3 mb-3">
+    <span class="brand-badge">{CATEGORIES[category].hint}</span>
+    <time class="text-xs text-muted tracking-wide" datetime={pubDate.toISOString()}>{formatted}</time>
   </div>
+
   <h3
     class={`font-serif text-ink leading-tight tracking-tight group-hover:text-accent transition-colors ${large ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'}`}
   >
@@ -48,4 +56,9 @@ const formatted = new Intl.DateTimeFormat('ru-RU', {
   <p class={`mt-2 text-ink-2 leading-relaxed ${large ? 'text-lg' : 'text-base'}`}>
     {description}
   </p>
+
+  <span class="eyebrow mt-4 inline-flex items-center gap-1.5 text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+    Читать
+    <span aria-hidden="true">→</span>
+  </span>
 </a>

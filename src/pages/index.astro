@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import Divider from '../components/Divider.astro';
 import { CATEGORIES, CATEGORY_ORDER, type CategoryId } from '../consts';
 
 type Entry = {
@@ -28,8 +29,9 @@ const [featured, ...rest] = all;
   <section class="border-b border-line">
     <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-end">
       <div class="md:col-span-7">
-        <div class="text-xs uppercase tracking-[0.25em] text-accent mb-6">
-          медиа о российских брендах
+        <div class="mb-6 flex items-center gap-3">
+          <span class="brand-badge">Спецпроект</span>
+          <span class="eyebrow text-muted">медиа о современных российских брендах</span>
         </div>
         <h1 class="font-serif text-5xl md:text-7xl leading-[1.05] tracking-tight text-ink">
           Истории тех,<br />
@@ -61,7 +63,10 @@ const [featured, ...rest] = all;
 
   {featured && (
     <section class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-xs uppercase tracking-widest text-muted mb-8">Главное</div>
+      <div class="mb-8 flex items-center gap-4">
+        <span class="eyebrow text-accent shrink-0">Главное</span>
+        <Divider class="flex-1" />
+      </div>
       <ArticleCard
         category={featured.category}
         slug={featured.slug}
@@ -75,8 +80,11 @@ const [featured, ...rest] = all;
   )}
 
   <section class="max-w-6xl mx-auto px-6 pb-20">
-    <div class="text-xs uppercase tracking-widest text-muted mb-8">Свежее</div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div class="mb-8 flex items-center gap-4">
+      <span class="eyebrow text-accent shrink-0">Свежее</span>
+      <Divider class="flex-1" />
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {rest.slice(0, 9).map((entry) => (
         <ArticleCard
           category={entry.category}

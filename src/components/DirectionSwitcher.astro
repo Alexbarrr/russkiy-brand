@@ -1,0 +1,37 @@
+---
+// Live mood-direction switcher — fulfills the brief's «3 визуальных направления».
+const dirs = [
+  { id: 'imperial', label: 'Имперский' },
+  { id: 'editorial', label: 'Редакционный' },
+  { id: 'soviet', label: 'Советский' },
+];
+---
+<div class="dir-switch" role="group" aria-label="Визуальное направление раздела">
+  {dirs.map((d) => (
+    <button type="button" data-dir-btn={d.id} aria-pressed={d.id === 'editorial'}>
+      {d.label}
+    </button>
+  ))}
+</div>
+
+<script is:inline>
+  (function () {
+    const KEY = 'rb-dir';
+    const root = document.documentElement;
+    function apply(dir) {
+      root.setAttribute('data-dir', dir);
+      document.querySelectorAll('[data-dir-btn]').forEach((b) => {
+        b.setAttribute('aria-pressed', b.getAttribute('data-dir-btn') === dir ? 'true' : 'false');
+      });
+    }
+    document.querySelectorAll('[data-dir-btn]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const dir = b.getAttribute('data-dir-btn');
+        try { localStorage.setItem(KEY, dir); } catch (e) {}
+        apply(dir);
+      });
+    });
+    // sync UI with the value the head-script already applied
+    apply(root.getAttribute('data-dir') || 'editorial');
+  })();
+</script>

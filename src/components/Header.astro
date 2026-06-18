@@ -1,36 +1,58 @@
 ---
 import { SITE, CATEGORIES, CATEGORY_ORDER } from '../consts';
+import Ornament from './Ornament.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.replace(base, '') || '/';
 ---
 
-<header class="border-b border-line bg-cream">
-  <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between gap-8">
-    <a href={`${base}/`} class="group flex items-baseline gap-2">
-      <span class="font-serif text-2xl tracking-tight text-ink">Русский</span>
-      <span class="font-serif text-2xl tracking-tight text-accent italic">бренд</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-7 text-sm">
-      {CATEGORY_ORDER.map((id) => {
-        const c = CATEGORIES[id];
-        const href = `${base}/${c.slug}/`;
-        const active = path.startsWith(`/${c.slug}`);
-        return (
-          <a
-            href={href}
-            class={`transition-colors hover:text-accent ${active ? 'text-accent' : 'text-ink-2'}`}
-          >
-            {c.hint}
-          </a>
-        );
-      })}
-      <a
-        href={`${base}/about/`}
-        class={`transition-colors hover:text-accent ${path.startsWith('/about') ? 'text-accent' : 'text-ink-2'}`}
-      >
-        О проекте
+<header class="bg-cream border-b border-line relative z-10">
+  <!-- титульная зона спецпроекта -->
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="pt-7 pb-5 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-x-6 gap-y-4">
+      <!-- знак + название -->
+      <a href={`${base}/`} class="flex items-center gap-3 md:justify-self-start justify-self-center">
+        <Ornament kind="mark" class="w-9 h-9 text-accent shrink-0" />
+        <span class="leading-none">
+          <span class="block font-serif text-2xl md:text-[1.7rem] tracking-tight text-ink">
+            Русский <span class="italic text-accent">бренд</span>
+          </span>
+          <span class="eyebrow block mt-1 text-muted">медиа о современных российских брендах</span>
+        </span>
       </a>
-    </nav>
+
+      <!-- центральная орнаментальная ось (десктоп) -->
+      <div class="hidden md:flex items-center justify-center">
+        <Ornament kind="rosette" class="w-5 h-5 text-accent opacity-70" />
+      </div>
+
+      <!-- навигация -->
+      <nav class="flex flex-wrap items-center justify-center md:justify-self-end gap-x-6 gap-y-2 text-sm">
+        {CATEGORY_ORDER.map((id) => {
+          const c = CATEGORIES[id];
+          const href = `${base}/${c.slug}/`;
+          const active = path.startsWith(`/${c.slug}`);
+          return (
+            <a
+              href={href}
+              class={`transition-colors hover:text-accent ${active ? 'text-accent' : 'text-ink-2'}`}
+            >
+              {c.hint}
+            </a>
+          );
+        })}
+        <a
+          href={`${base}/about/`}
+          class={`transition-colors hover:text-accent ${path.startsWith('/about') ? 'text-accent' : 'text-ink-2'}`}
+        >
+          О проекте
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ажурная кромка титула -->
+  <div class="h-3 text-accent opacity-50 overflow-hidden">
+    <Ornament kind="scallop" class="w-full h-full" />
   </div>
 </header>
