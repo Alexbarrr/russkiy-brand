@@ -82,6 +82,25 @@ a {
   text-decoration: none;
 }
 
+/* Keyboard focus — visible accent ring on every interactive element */
+:where(a, button, [role="button"], input, select, summary):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respect reduced-motion: kill decorative transforms/transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ----------------------------------------------------------------------------
    Decorative system
 ---------------------------------------------------------------------------- */
@@ -174,8 +193,12 @@ a {
   width: 13px;
   height: 13px;
   border: 0 solid var(--ornament-strong);
-  opacity: 0.9;
+  opacity: 0.55;
   transition: opacity 0.3s;
+}
+.framed:hover .corner,
+.framed:focus-visible .corner {
+  opacity: 1;
 }
 .framed .corner-tl { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
 .framed .corner-tr { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
@@ -206,8 +229,12 @@ a {
   letter-spacing: 0.1em;
   font-size: 0.64rem;
   font-weight: 500;
-  color: #cfc6b8;
-  padding: 0.45em 0.9em;
+  /* tracks the active palette instead of a fixed grey */
+  color: color-mix(in srgb, var(--color-cream), var(--color-ink) 32%);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4em 0.95em;
   border-radius: 999px;
   cursor: pointer;
   transition: color 0.2s, background 0.2s;
@@ -215,6 +242,16 @@ a {
 .dir-switch button[aria-pressed="true"] {
   color: var(--color-ink);
   background: var(--color-cream);
+}
+
+/* Touch devices: give inline nav/footer links a 44px-tall tap target */
+@media (pointer: coarse) {
+  header nav a,
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }
 
 /* ----------------------------------------------------------------------------
