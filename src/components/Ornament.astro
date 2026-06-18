@@ -5,14 +5,17 @@
 // `color` recolors it; `fill="currentColor"` for solid nodes.
 interface Props {
   kind: 'rail' | 'rosette' | 'mark' | 'scallop';
+  // unique suffix so duplicate patterns on one page don't share a DOM id
+  id?: string;
   class?: string;
 }
-const { kind, class: cls = '' } = Astro.props;
+const { kind, id = 'a', class: cls = '' } = Astro.props;
+const pid = `${kind}-${id}`;
 ---
 {kind === 'rail' && (
   <svg class={cls} viewBox="0 0 56 240" preserveAspectRatio="xMidYMin" aria-hidden="true">
     <defs>
-      <pattern id="rail-motif" width="56" height="120" patternUnits="userSpaceOnUse">
+      <pattern id={pid} width="56" height="120" patternUnits="userSpaceOnUse">
         <g fill="none" stroke="currentColor" stroke-width="1.1">
           <!-- central double spine -->
           <line x1="24" y1="0" x2="24" y2="120" />
@@ -33,7 +36,7 @@ const { kind, class: cls = '' } = Astro.props;
         </g>
       </pattern>
     </defs>
-    <rect width="56" height="240" fill="url(#rail-motif)" />
+    <rect width="56" height="240" fill={`url(#${pid})`} />
   </svg>
 )}
 
@@ -57,7 +60,7 @@ const { kind, class: cls = '' } = Astro.props;
 {kind === 'scallop' && (
   <svg class={cls} viewBox="0 0 48 12" preserveAspectRatio="xMidYMid" aria-hidden="true">
     <defs>
-      <pattern id="scallop-motif" width="24" height="12" patternUnits="userSpaceOnUse">
+      <pattern id={pid} width="24" height="12" patternUnits="userSpaceOnUse">
         <g fill="none" stroke="currentColor" stroke-width="1">
           <path d="M0 3 a6 6 0 0 0 12 0 a6 6 0 0 0 12 0" />
           <circle cx="6" cy="9" r="1.4" />
@@ -65,6 +68,6 @@ const { kind, class: cls = '' } = Astro.props;
         </g>
       </pattern>
     </defs>
-    <rect width="48" height="12" fill="url(#scallop-motif)" />
+    <rect width="48" height="12" fill={`url(#${pid})`} />
   </svg>
 )}
