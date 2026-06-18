@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LogoMark from '../components/LogoMark.astro';
+import Divider from '../components/Divider.astro';
+
+const variants = [
+  { id: 'a', name: 'A · Печать', note: '«Р» в рамке-клейме (текущий)' },
+  { id: 'b', name: 'B · Знамя', note: 'чаша-флаг, стебель — древко' },
+  { id: 'c', name: 'C · Медальон', note: 'круглая печать, имперская ось' },
+  { id: 'd', name: 'D · Плашка', note: 'монолит, выбитая «Р» (app-icon)' },
+] as const;
+---
+
+<Layout title="Знак — варианты" description="Сравнение вариантов логотипа раздела «Русский бренд».">
+  <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="brand-badge">Знак</span>
+      <span class="eyebrow text-muted">4 варианта · базовое направление — редакционное</span>
+    </div>
+    <h1 class="font-serif text-5xl md:text-6xl tracking-tight text-ink leading-[1.05]">
+      Логотип — <span class="italic text-accent">сравнение</span>
+    </h1>
+    <p class="mt-5 text-lg text-ink-2 max-w-2xl leading-relaxed">
+      Каждый знак — в один цвет (наследует акцент направления), показан крупно, как аватар,
+      в шапке и мелко (20px) для проверки масштабируемости.
+    </p>
+
+    <div class="mt-12 grid sm:grid-cols-2 gap-8">
+      {variants.map((v) => (
+        <div class="framed bg-cream-2/30 p-6">
+          <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+          <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+
+          <div class="flex items-baseline justify-between gap-3 mb-6">
+            <span class="eyebrow text-accent">{v.name}</span>
+            <span class="text-xs text-muted text-right">{v.note}</span>
+          </div>
+
+          <div class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-6 items-center">
+            <!-- большой знак -->
+            <div class="w-24 h-24 text-accent flex items-center justify-center">
+              <LogoMark variant={v.id} class="w-24 h-24" />
+            </div>
+
+            <!-- контексты -->
+            <div class="space-y-5">
+              <!-- аватар: кремовый на бордо -->
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 bg-accent rounded-xl flex items-center justify-center text-cream">
+                  <LogoMark variant={v.id} class="w-9 h-9" />
+                </div>
+                <span class="text-xs text-muted">аватар</span>
+              </div>
+
+              <!-- лок-ап в шапке -->
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 text-accent shrink-0 flex items-center justify-center">
+                  <LogoMark variant={v.id} class="w-9 h-9" />
+                </div>
+                <span class="leading-none">
+                  <span class="block font-serif text-xl tracking-tight text-ink">
+                    Русский <span class="italic text-accent">бренд</span>
+                  </span>
+                  <span class="eyebrow block mt-1 text-muted text-[0.6rem]">медиа о российских брендах</span>
+                </span>
+              </div>
+
+              <!-- мелко -->
+              <div class="flex items-center gap-4">
+                <div class="w-5 h-5 text-ink flex items-center justify-center">
+                  <LogoMark variant={v.id} class="w-5 h-5" />
+                </div>
+                <span class="text-xs text-muted">20px — проверка читаемости</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12"><Divider /></div>
+    <p class="mt-6 text-sm text-muted max-w-2xl">
+      Переключи направление внизу — знаки перекрасятся под палитру (бордо / золото / красный).
+      Какой берём за основу?
+    </p>
+  </div>
+</Layout>

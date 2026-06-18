@@ -1,0 +1,37 @@
+---
+// Logo-mark candidates for «Русский бренд». One color via currentColor.
+// a = stamp (current), b = banner, c = medallion, d = solid plate.
+interface Props {
+  variant: 'a' | 'b' | 'c' | 'd';
+  class?: string;
+}
+const { variant, class: cls = '' } = Astro.props;
+---
+{variant === 'a' && (
+  <svg class={cls} viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+    <rect x="4.5" y="4.5" width="39" height="39" rx="8.5" fill="none" stroke="currentColor" stroke-width="2.4" />
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M17 12.5 H32.5 a4 4 0 0 1 4 4 V23 a4 4 0 0 1 -4 4 H23 V35.5 H17 Z M25 16.5 H30.5 a1.5 1.5 0 0 1 1.5 1.5 V21 a1.5 1.5 0 0 1 -1.5 1.5 H25 Z" />
+    <rect x="20" y="38.5" width="8" height="2.2" rx="1.1" />
+  </svg>
+)}
+
+{variant === 'b' && (
+  <svg class={cls} viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+    <!-- «Р» как знамя: чаша-флаг с ласточкиным хвостом, стебель — древко -->
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M16 10 H37 L31.5 18 L37 26 H22 V40 H16 Z M24 14.5 H31 V21.5 H24 Z" />
+  </svg>
+)}
+
+{variant === 'c' && (
+  <svg class={cls} viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+    <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.2" />
+    <circle cx="24" cy="24" r="16.5" fill="none" stroke="currentColor" stroke-width="0.9" />
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M19 15 H29.5 a3.8 3.8 0 0 1 3.8 3.8 V22 a3.8 3.8 0 0 1 -3.8 3.8 H24.5 V33 H19 Z M24.5 18.5 H29 V22.3 H24.5 Z" />
+  </svg>
+)}
+
+{variant === 'd' && (
+  <svg class={cls} viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 12 a8 8 0 0 1 8 -8 H36 a8 8 0 0 1 8 8 V36 a8 8 0 0 1 -8 8 H12 a8 8 0 0 1 -8 -8 Z M17 13 H32 a4 4 0 0 1 4 4 V23 a4 4 0 0 1 -4 4 H23 V35 H17 Z M24.5 17 H30 V22.5 H24.5 Z" />
+  </svg>
+)}
