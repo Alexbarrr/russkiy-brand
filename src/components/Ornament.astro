@@ -50,10 +50,17 @@ const pid = `${kind}-${id}`;
 )}
 
 {kind === 'mark' && (
-  <svg class={cls} viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-    <!-- placeholder монограмма «РБ» под будущий логотип: монолитный знак -->
-    <rect x="3" y="3" width="42" height="42" />
-    <path d="M16 13 v22 M16 13 h9 a6 6 0 0 1 0 12 h-9 M25 25 l9 10" stroke-width="2.4" />
+  <svg class={cls} viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+    <!-- Знак «Русский бренд»: клеймо-печать с монолитной «Р».
+         Один цвет (currentColor), сильный силуэт, читается в аватарке.
+         Рамка-печать + засечка-«ось» внизу как отсылка к гербовой симметрии. -->
+    <rect x="4.5" y="4.5" width="39" height="39" rx="8.5" fill="none" stroke="currentColor" stroke-width="2.4" />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M17 12.5 H32.5 a4 4 0 0 1 4 4 V23 a4 4 0 0 1 -4 4 H23 V35.5 H17 Z M25 16.5 H30.5 a1.5 1.5 0 0 1 1.5 1.5 V21 a1.5 1.5 0 0 1 -1.5 1.5 H25 Z"
+    />
+    <rect x="20" y="38.5" width="8" height="2.2" rx="1.1" />
   </svg>
 )}
 
