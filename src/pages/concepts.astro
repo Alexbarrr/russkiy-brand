@@ -1,34 +1,35 @@
 ---
-// /concepts — сравнение 3 направлений концепта v2 «Русский бренд».
-// Каждое направление — изолированная система токенов на обёртке [data-c],
-// применённая к реальному контенту. Утверждённый логотип-наличник тинтуется
-// под концепт через CSS-маску (public/logo/lockup.svg — одноцветный currentColor).
+// /concepts — 3 тональные вариации УТВЕРЖДЁННОГО макета статьи (ref: Desktop-7).
+// Общий каркас: full-bleed фото-hero + оверлей-шапка (наличник × СМИ2) +
+// центрированный белый титул + дата, ниже — светлое тело статьи узкой колонкой.
+// Направления различаются тоном/типографикой/декором, НЕ структурой.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const logo = `${base}/logo/lockup.svg`;
+const heroImg = `${base}/hero/wine.jpg`;
 
-// Реальные материалы раздела
-const heroPhoto =
-  'https://img.smi2.net/400x300/39d4d1db010cb4be5d38efca0ec4aaaa25e4a907.jpg?u=aHR0cHM6Ly9tdGRhdGEucnUvdTI0L3Bob3RvQTk1Ni8yMDUyNzM1NTIwMy0wL29yaWdpbmFsLmpwZWc';
 const hero = {
   cat: 'Новости',
   title: 'Русское вино — чемпион: «Абрау-Дюрсо» обошло 17 стран на международном конкурсе',
   date: '26.06.2026',
-  lead:
-    'Международное жюри конкурса TERRAVINO впервые в истории присудило звание Grand Champion International российскому производителю — классическому игристому Brut d’Or Riesling 2022.',
 };
+const body = [
+  'Международное жюри ведущего израильского конкурса TERRAVINO впервые в истории присудило звание Grand Champion International российскому производителю. Титул, который получает только одно вино — лучшее среди всех участников, — завоевало классическое игристое Brut d’Or Riesling 2022 от Группы компаний «Абрау-Дюрсо».',
+  'Юбилейный, 20-й конкурс TERRAVINO, прошедший в Тель-Авиве, собрал 578 образцов из 18 стран мира. Дегустация проходила вслепую по стандартам Международной организации винограда и вина (OIV) — это гарантирует объективность оценки и делает победу особенно престижной.',
+  'Как отметил владелец группы компаний «Абрау-Дюрсо» Борис Титов, победа на TERRAVINO — важный шаг для всего российского виноделия: «Первый случай, когда российский производитель получил звание Гранд-чемпиона на ведущем дегустационном конкурсе Израиля».',
+];
 const cards = [
-  { cat: 'История', cover: `${base}/covers/keramika-gromov.svg`, title: 'Керамика Громовых: как семейная мастерская стала брендом', date: '24.06.2026' },
-  { cat: 'Обзор', cover: `${base}/covers/kosmetika-podborka.svg`, title: 'Отечественная косметика: 12 марок, за которыми стоит следить', date: '21.06.2026' },
-  { cat: 'Интервью', cover: `${base}/covers/chaynaya-masterskaya.svg`, title: 'Чайная мастерская: русский вкус вне сезонов и трендов', date: '18.06.2026' },
+  { cat: 'Обзор', cover: `${base}/covers/kosmetika-podborka.svg`, title: 'Женское вино: что предпочитают представительницы новой волны', date: '21.06.2026' },
+  { cat: 'История', cover: `${base}/covers/chaynaya-masterskaya.svg`, title: 'Винная карта России перекраивает меню ресторанов', date: '18.06.2026' },
+  { cat: 'Интервью', cover: `${base}/covers/keramika-gromov.svg`, title: 'Сомелье хвалят «Абрау-Дюрсо»: соцсети диктуют моду', date: '15.06.2026' },
 ];
 
 const concepts = [
-  { id: 'nalichnik', n: '01', name: 'Наличник', sub: 'Резьба', prop: '50 / 35 / 15', tag: 'imperial через дерево',
-    blurb: 'Тёплое, тактильное, резное. Наличник — структурный мотив: обложки обрамляются как окна. Serif-first, статус, наследие.' },
-  { id: 'utro', n: '02', name: 'Утро', sub: 'Конструктив', prop: '55 / 15 / 30', tag: 'soviet, плакатный',
-    blurb: 'Смелое конструктивистское медиа. Плакатный бордо структурно, кондансед-дисплей, асимметрия, диагонали. Наличник — клеймо.' },
-  { id: 'zoloto', n: '03', name: 'Золото', sub: 'Империя', prop: '45 / 45 / 10', tag: 'imperial через металл',
-    blurb: 'Церемониальная роскошь. Матовое золото доминирует, тёмные фоны, золочёные рамки, симметрия. Дворец/музей, «поставщикъ двора».' },
+  { id: 'chistoe', n: '01', name: 'Чистое', sub: 'Editorial', tag: 'ближе всего к утверждённому макету',
+    blurb: 'Точное прочтение утверждённого макета: чистый гротеск-титул, минимум декора, белое тело статьи. Наличник несёт всю «русскость».' },
+  { id: 'nalichnik', n: '02', name: 'Наличник', sub: 'Резьба', tag: 'тёплое, serif, золотой акцент',
+    blurb: 'Тот же макет, но теплее: serif-титул (Cormorant), кремовое тело с буквицей, золотая дата и розетка-делитель. Редакционная роскошь.' },
+  { id: 'zoloto', n: '03', name: 'Золото', sub: 'Империя', tag: 'тёмное тело, церемониально',
+    blurb: 'Тот же макет в тёмном ключе: тело статьи на чернильном фоне, золотой serif и золочёные хайрлайны. Дворец/музей, максимум статуса.' },
 ];
 ---
 
@@ -38,203 +39,162 @@ const concepts = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
-    <title>Русский бренд — 3 направления концепта</title>
+    <title>Русский бренд — 3 тональные вариации макета</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Oswald:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <style is:global>
       *, *::before, *::after { box-sizing: border-box; }
       html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-      body { margin: 0; background: #e7e3db; color: #2c2825;
-        font-family: Inter, system-ui, sans-serif; }
+      body { margin: 0; background: #e7e3db; color: #2c2825; font-family: Inter, system-ui, sans-serif; }
       a { color: inherit; text-decoration: none; }
       img { display: block; max-width: 100%; }
       :focus-visible { outline: 2px solid #9b080e; outline-offset: 3px; border-radius: 2px; }
 
       /* ---------- страничный каркас сравнения ---------- */
-      .page-head { max-width: 1100px; margin: 0 auto; padding: 64px 24px 8px; }
-      .kicker { font-family: Oswald, sans-serif; text-transform: uppercase;
-        letter-spacing: .28em; font-size: 12px; font-weight: 600; color: #9b080e; }
+      .page-head { max-width: 1100px; margin: 0 auto; padding: 56px 24px 4px; }
+      .kicker { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .28em;
+        font-size: 12px; font-weight: 600; color: #9b080e; }
       .page-head h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600;
-        font-size: clamp(32px, 5vw, 52px); line-height: 1.05; margin: 12px 0 10px; }
-      .page-head p { max-width: 62ch; color: #57514a; font-size: 16px; line-height: 1.6; margin: 0; }
+        font-size: clamp(30px, 5vw, 48px); line-height: 1.05; margin: 10px 0 8px; }
+      .page-head p { max-width: 64ch; color: #57514a; font-size: 15.5px; line-height: 1.6; margin: 0; }
 
-      .summary { max-width: 1100px; margin: 28px auto 8px; padding: 0 24px;
-        display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+      .summary { max-width: 1100px; margin: 24px auto 4px; padding: 0 24px;
+        display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
       @media (max-width: 860px) { .summary { grid-template-columns: 1fr; } }
-      .sum { background: #fff; border: 1px solid #d9d3c8; border-radius: 12px; padding: 18px 18px 20px; }
-      .sum__top { display: flex; align-items: baseline; gap: 8px; }
-      .sum__n { font-family: Oswald, sans-serif; font-weight: 600; color: #b7b0a4; font-size: 13px; letter-spacing: .1em; }
-      .sum__name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; }
-      .sum__sub { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .22em;
-        font-size: 11px; color: #9b080e; margin-left: auto; }
-      .sum__prop { font-family: Oswald, sans-serif; font-size: 12px; letter-spacing: .16em; color: #8a8278; margin: 8px 0 4px; }
-      .sum__bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
-      .sum__blurb { font-size: 13.5px; line-height: 1.55; color: #57514a; margin: 0 0 14px; }
-      .sw { display: flex; gap: 6px; }
-      .sw span { width: 26px; height: 26px; border-radius: 6px; border: 1px solid rgba(0,0,0,.08); }
-      .jump { display: inline-block; margin-top: 14px; font-family: Oswald, sans-serif;
-        text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 600;
-        color: #2c2825; border-bottom: 1px solid #9b080e; padding-bottom: 2px; }
+      .sum { background: #fff; border: 1px solid #d9d3c8; border-radius: 12px; padding: 16px 16px 18px; }
+      .sum__top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+      .sum__n { font-family: Oswald, sans-serif; font-weight: 600; color: #b7b0a4; font-size: 13px; }
+      .sum__name { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 600; }
+      .sum__sub { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .2em;
+        font-size: 10px; color: #9b080e; margin-left: auto; }
+      .sum__blurb { font-size: 13px; line-height: 1.55; color: #57514a; margin: 6px 0 12px; }
+      .sw { display: flex; gap: 6px; margin-bottom: 12px; }
+      .sw span { width: 24px; height: 24px; border-radius: 6px; border: 1px solid rgba(0,0,0,.08); }
+      .jump { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .16em;
+        font-size: 11px; font-weight: 600; color: #2c2825; border-bottom: 1px solid #9b080e; padding-bottom: 2px; }
 
       /* ---------- логотип-наличник (маска, тинт под концепт) ---------- */
-      .logo { width: 128px; aspect-ratio: 400 / 170;
+      .logo { width: 132px; aspect-ratio: 400 / 170;
         -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat;
-        background: var(--logo-c, currentColor); }
-      .logo--sm { width: 84px; }
+        background: var(--logo-c, #fff); flex: none; }
 
       /* ==================================================================
-         Базовые компоненты «живой полосы» — читают локальные токены концепта
+         Каркас «живой» статьи — читает локальные токены концепта
       ================================================================== */
-      .band { --pad: clamp(28px, 5vw, 64px);
-        background: var(--bg); color: var(--ink); font-family: var(--font-ui);
-        border-top: 1px solid rgba(0,0,0,.06); scroll-margin-top: 12px; }
-      .band__label { max-width: 1180px; margin: 0 auto; padding: 22px var(--pad) 0;
+      .band { border-top: 1px solid rgba(0,0,0,.08); scroll-margin-top: 0; }
+      .band__label { max-width: 1180px; margin: 0 auto; padding: 20px 24px 12px;
         display: flex; align-items: baseline; gap: 14px; }
-      .band__num { font-family: var(--font-label); font-weight: 700; letter-spacing: .1em;
-        font-size: 13px; color: var(--muted); }
-      .band__name { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .24em;
-        font-size: 13px; font-weight: 600; color: var(--accent); }
-      .band__tag { margin-left: auto; font-size: 12px; color: var(--muted); font-style: italic; }
-      .frame { max-width: 1180px; margin: 0 auto; padding: 18px var(--pad) var(--pad); }
+      .band__num { font-family: Oswald, sans-serif; font-weight: 600; font-size: 13px; color: #b7b0a4; }
+      .band__name { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .22em;
+        font-size: 13px; font-weight: 600; color: #9b080e; }
+      .band__tag { margin-left: auto; font-size: 12px; color: #8a8278; font-style: italic; }
 
-      /* шапка-плашка × СМИ2 */
-      .plate { display: flex; align-items: center; gap: 18px;
-        padding-bottom: 18px; border-bottom: var(--rule); }
-      .plate .logo { --logo-c: var(--logo-color); }
-      .plate__x { color: var(--muted); font-size: 18px; }
-      .smi2 { display: inline-flex; align-items: center; gap: 8px;
-        font-family: var(--font-label); font-weight: 600; letter-spacing: .12em; font-size: 15px;
-        text-transform: uppercase; color: var(--ink); }
+      /* hero — full-bleed фото + оверлей */
+      .hero { position: relative; min-height: min(78vh, 620px); display: flex; flex-direction: column;
+        background: #14110f; overflow: hidden; }
+      .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .hero__scrim { position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(10,8,6,.45) 0%, rgba(10,8,6,.12) 38%, rgba(10,8,6,.78) 100%); }
+      .hero__nav { position: relative; z-index: 2; display: flex; align-items: center; gap: 16px;
+        padding: clamp(20px, 3vw, 34px) clamp(22px, 4vw, 56px); }
+      .hero__x { color: rgba(255,255,255,.7); font-size: 18px; }
+      .smi2 { display: inline-flex; align-items: center; gap: 8px; color: #fff;
+        font-family: Oswald, sans-serif; font-weight: 500; letter-spacing: .1em; font-size: 16px; text-transform: uppercase; }
       .smi2 b { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
-        background: var(--ink); color: var(--bg); font-family: Inter, sans-serif; font-weight: 700; font-size: 14px; }
-      .plate__desc { margin-left: auto; font-size: 13px; color: var(--muted); max-width: 30ch; text-align: right;
-        line-height: 1.4; }
-      @media (max-width: 640px) { .plate__desc { display: none; } }
+        background: #fff; color: #14110f; font-family: Inter, sans-serif; font-weight: 700; font-size: 14px; }
+      .hero__center { position: relative; z-index: 2; margin-top: auto;
+        padding: clamp(28px, 5vw, 60px) clamp(22px, 6vw, 90px) clamp(40px, 6vw, 72px); text-align: center; }
+      .hero__eyebrow { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .24em;
+        font-size: 11px; font-weight: 600; color: var(--hero-accent, #fff); opacity: .9; margin-bottom: 14px; }
+      .hero__title { color: #fff; margin: 0 auto; max-width: 20ch;
+        font-family: var(--title-font); font-weight: var(--title-weight); line-height: 1.14;
+        font-size: clamp(26px, 3.6vw, 44px); }
+      .hero__date { margin-top: 18px; font-family: Oswald, sans-serif; letter-spacing: .18em;
+        font-size: 13px; color: var(--date-color, rgba(255,255,255,.72)); }
 
-      /* hero */
-      .hero { margin-top: var(--pad); }
-      .eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .2em;
-        font-size: 11px; font-weight: 600; color: var(--accent); }
-      .hero__title { font-family: var(--font-head); line-height: 1.06; margin: 12px 0; }
-      .hero__lead { color: var(--ink-2); font-size: 16px; line-height: 1.6; max-width: 60ch; }
-      .hero__date { font-family: var(--font-label); font-size: 12px; letter-spacing: .14em; color: var(--muted); }
+      /* тело статьи */
+      .body { background: var(--body-bg); color: var(--body-ink); }
+      .body__col { max-width: 720px; margin: 0 auto; padding: clamp(40px, 6vw, 76px) 24px clamp(32px,4vw,52px); }
+      .body__col p { font-size: 18px; line-height: 1.75; margin: 0 0 22px; }
+      .body__col p:first-of-type { font-size: 20px; color: var(--body-lead, var(--body-ink)); }
+      .rosette { display: flex; align-items: center; justify-content: center; gap: 16px;
+        color: var(--gold, #c6a25e); margin: 4px auto 30px; max-width: 720px; }
+      .rosette::before, .rosette::after { content: ''; width: 90px; height: 1px; background: currentColor; opacity: .55; }
+      .rosette svg { width: 30px; height: 30px; }
 
-      /* лента карточек */
-      .grid { margin-top: var(--pad); display: grid; gap: 22px; grid-template-columns: repeat(3, 1fr); }
-      @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-      .card { position: relative; background: var(--surface); border: var(--card-border);
-        border-radius: var(--radius); overflow: hidden; transition: transform .25s ease; }
-      .card:hover { transform: translateY(-3px); }
-      .card__img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; background: var(--cream-2, #eee); }
-      .card__body { padding: 16px 18px 20px; }
-      .card__cat { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .16em;
-        font-size: 10px; font-weight: 600; color: var(--bg); background: var(--accent);
-        padding: 4px 9px; border-radius: 3px; display: inline-block; }
-      .card__title { font-family: var(--font-head); font-size: 21px; line-height: 1.18; margin: 12px 0 10px;
-        font-weight: var(--head-weight, 600); }
-      .card__date { font-family: var(--font-label); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
-
-      /* делитель-розетка */
-      .rosette { display: flex; align-items: center; gap: 16px; margin-top: var(--pad); color: var(--ornament); }
-      .rosette::before, .rosette::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: .5; }
-      .rosette svg { width: 34px; height: 34px; }
-
-      @media (prefers-reduced-motion: reduce) {
-        .card, .card:hover { transition: none; transform: none; }
-      }
+      /* «ещё по теме» */
+      .also { background: var(--body-bg); border-top: 1px solid var(--line, rgba(0,0,0,.08)); }
+      .also__in { max-width: 1100px; margin: 0 auto; padding: 8px 24px clamp(48px,6vw,72px); }
+      .also__h { font-family: var(--title-font); font-weight: var(--title-weight); color: var(--body-ink);
+        font-size: 24px; margin: 24px 0 20px; }
+      .grid { display: grid; gap: 22px; grid-template-columns: repeat(3, 1fr); }
+      @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+      .card { display: block; }
+      .card__img { aspect-ratio: 3 / 2; width: 100%; object-fit: cover; border-radius: var(--radius, 4px);
+        background: rgba(0,0,0,.05); }
+      .card__cat { display: inline-block; margin: 12px 0 8px; font-family: Oswald, sans-serif;
+        text-transform: uppercase; letter-spacing: .16em; font-size: 10px; font-weight: 600; color: var(--accent); }
+      .card__title { font-family: var(--title-font); font-weight: var(--title-weight); color: var(--body-ink);
+        font-size: 18px; line-height: 1.28; margin: 0 0 8px; }
+      .card__date { font-family: Oswald, sans-serif; font-size: 11px; letter-spacing: .12em; color: var(--body-muted); }
 
       /* ==================================================================
-         01 · НАЛИЧНИК — imperial через дерево
+         01 · ЧИСТОЕ — точное прочтение утверждённого макета
+      ================================================================== */
+      [data-c='chistoe'] {
+        --title-font: Inter, sans-serif; --title-weight: 600;
+        --body-bg: #fbfaf7; --body-ink: #1f1c18; --body-lead: #1f1c18; --body-muted: #8a8278;
+        --accent: #9b080e; --gold: #9b080e; --line: #ece7dd; --radius: 6px;
+        --date-color: rgba(255,255,255,.78); --logo-c: #fff;
+      }
+      [data-c='chistoe'] .rosette { display: none; }
+
+      /* ==================================================================
+         02 · НАЛИЧНИК — тёплое, serif, золотой акцент
       ================================================================== */
       [data-c='nalichnik'] {
-        --bg: #f4ead8; --surface: #fbf4e6; --cream-2: #efe1c8;
-        --ink: #2f2318; --ink-2: #6b4e34; --muted: #9c8465;
-        --accent: #9b080e; --gold: #a8823c; --line: #dcc6a4;
-        --logo-color: #33251a;
-        --font-head: 'Cormorant Garamond', serif; --font-ui: Inter, sans-serif; --font-label: Oswald, sans-serif;
-        --rule: 1px solid var(--line); --card-border: 1px solid var(--line); --radius: 6px;
-        --ornament: var(--gold); --head-weight: 600;
+        --title-font: 'Cormorant Garamond', serif; --title-weight: 600;
+        --body-bg: #f5ebd9; --body-ink: #2f2318; --body-lead: #4a3826; --body-muted: #9c8465;
+        --accent: #9b080e; --gold: #b8893a; --line: #e0cfab; --radius: 4px;
+        --hero-accent: #e8c98b; --date-color: #e6c98f; --logo-c: #f3e7cf;
       }
-      [data-c='nalichnik'] .hero__title { font-size: clamp(30px, 4.4vw, 50px); font-weight: 600; }
-      /* обложка hero в «оконной» раме */
-      [data-c='nalichnik'] .hero__frame { border: 1px solid var(--gold); padding: 10px;
-        background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
-      [data-c='nalichnik'] .hero__frame img { aspect-ratio: 16/10; width: 100%; object-fit: cover; }
-      [data-c='nalichnik'] .hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--pad); align-items: center; }
-      @media (max-width: 820px) { [data-c='nalichnik'] .hero { grid-template-columns: 1fr; } }
+      [data-c='nalichnik'] .hero__title { font-size: clamp(30px, 4.4vw, 52px); }
+      /* буквица */
+      [data-c='nalichnik'] .body__col p:first-of-type::first-letter {
+        font-family: 'Cormorant Garamond', serif; font-weight: 700; float: left; line-height: .8;
+        font-size: 68px; padding: 6px 12px 0 0; color: var(--accent); }
 
       /* ==================================================================
-         02 · УТРО — soviet конструктив, плакатный бордо структурно
-      ================================================================== */
-      [data-c='utro'] {
-        --bg: #f2efe6; --surface: #ffffff; --cream-2: #e6e1d4;
-        --ink: #17140f; --ink-2: #3a352d; --muted: #8a8377;
-        --accent: #9b080e; --gold: #9b080e; --line: #d8d2c4;
-        --logo-color: #17140f;
-        --font-head: Oswald, sans-serif; --font-ui: Inter, sans-serif; --font-label: Oswald, sans-serif;
-        --rule: 2px solid var(--ink); --card-border: 1.5px solid var(--ink); --radius: 0px;
-        --ornament: var(--ink); --head-weight: 600;
-      }
-      [data-c='utro'] .band__name { color: var(--ink); }
-      /* hero = плакатный красный блок с реверсным дисплеем + фото-полоса */
-      [data-c='utro'] .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; }
-      @media (max-width: 820px) { [data-c='utro'] .hero { grid-template-columns: 1fr; } }
-      [data-c='utro'] .hero__text { background: var(--accent); color: #fff; padding: clamp(22px,3vw,40px); }
-      [data-c='utro'] .hero__text .eyebrow { color: #fff; opacity: .9; }
-      [data-c='utro'] .hero__text .hero__date { color: #fff; opacity: .8; }
-      [data-c='utro'] .hero__title { font-family: Oswald, sans-serif; text-transform: uppercase;
-        font-weight: 700; letter-spacing: -.01em; font-size: clamp(26px, 3.6vw, 44px); line-height: .98; color: #fff; }
-      [data-c='utro'] .hero__lead { color: rgba(255,255,255,.85); }
-      [data-c='utro'] .hero__img { object-fit: cover; width: 100%; height: 100%; min-height: 240px;
-        filter: grayscale(1) contrast(1.05); }
-      [data-c='utro'] .card { box-shadow: 5px 5px 0 var(--ink); }
-      [data-c='utro'] .card:hover { box-shadow: 7px 7px 0 var(--accent); }
-      [data-c='utro'] .card__cat { border-radius: 0; }
-      [data-c='utro'] .card__title { text-transform: none; font-family: Oswald, sans-serif; font-weight: 500; letter-spacing: .005em; }
-
-      /* ==================================================================
-         03 · ЗОЛОТО — imperial через металл, церемониальная роскошь
+         03 · ЗОЛОТО — тёмное тело, церемониальное золото
       ================================================================== */
       [data-c='zoloto'] {
-        --bg: #171009; --surface: #20180d; --cream-2: #2a2114;
-        --ink: #f3ead6; --ink-2: #cbbd9d; --muted: #9a8a68;
-        --accent: #c6a25e; --gold: #c6a25e; --line: rgba(198,162,94,.35);
-        --logo-color: #c6a25e;
-        --font-head: 'Cormorant Garamond', serif; --font-ui: Inter, sans-serif; --font-label: Oswald, sans-serif;
-        --rule: 1px solid var(--line); --card-border: 1px solid var(--line); --radius: 2px;
-        --ornament: var(--gold); --head-weight: 500;
+        --title-font: 'Cormorant Garamond', serif; --title-weight: 500;
+        --body-bg: #171009; --body-ink: #ece2cd; --body-lead: #f3ead6; --body-muted: #9a8a68;
+        --accent: #c6a25e; --gold: #c6a25e; --line: rgba(198,162,94,.28); --radius: 2px;
+        --hero-accent: #d9b877; --date-color: #d9b877; --logo-c: #d9b877;
       }
-      [data-c='zoloto'] .smi2 b { background: var(--gold); color: #171009; }
-      [data-c='zoloto'] .card__cat { color: #171009; background: var(--gold); }
-      [data-c='zoloto'] .hero { text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;
-        border: 1px solid var(--line); padding: clamp(24px,3vw,44px);
-        box-shadow: inset 0 0 0 4px rgba(198,162,94,.12); }
-      [data-c='zoloto'] .hero .eyebrow { color: var(--gold); }
-      [data-c='zoloto'] .hero__title { font-family: 'Cormorant Garamond', serif; font-weight: 500;
-        font-size: clamp(28px, 4vw, 46px); color: var(--gold); }
-      [data-c='zoloto'] .hero__lead { color: var(--ink-2); margin-left: auto; margin-right: auto; }
-      [data-c='zoloto'] .hero__inset { width: 180px; margin: 0 auto 18px; border: 1px solid var(--gold);
-        padding: 6px; }
-      [data-c='zoloto'] .hero__inset img { aspect-ratio: 3/2; object-fit: cover; width: 100%; }
-      [data-c='zoloto'] .card__title { color: var(--ink); }
+      [data-c='zoloto'] .hero__title { color: #f0e2c4; }
+      [data-c='zoloto'] .smi2 b { background: #c6a25e; color: #171009; }
+      [data-c='zoloto'] .body__col { text-align: center; }
+      [data-c='zoloto'] .body__col p:first-of-type { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1.5; }
+      [data-c='zoloto'] .also { border-top-color: var(--line); }
     </style>
   </head>
   <body>
     <header class="page-head">
-      <div class="kicker">Русский бренд · v2 · сравнение направлений</div>
-      <h1>Три направления концепта</h1>
+      <div class="kicker">Русский бренд · v2 · вариации утверждённого макета</div>
+      <h1>Три тональные вариации</h1>
       <p>
-        Одна культура — три интонации. Каждое направление применено к реальному контенту раздела
-        (шапка × СМИ2, hero-статья, лента карточек, делитель) с собственной палитрой, шрифтами
-        и пропорцией слоёв <b>editorial / imperial / soviet</b>. Логотип-наличник — общий, утверждённый.
+        За основу взят утверждённый макет статьи: полноширинный фото-hero, шапка «наличник × СМИ2»
+        поверх фото, центрированный титул и светлое тело статьи. Три направления меняют <b>тон,
+        типографику и декор</b> — но не структуру. Логотип и палитра — утверждённые.
       </p>
     </header>
 
-    <!-- Сводка: 3 карточки рядом -->
     <section class="summary">
       {concepts.map((c) => (
         <article class="sum">
@@ -243,110 +203,70 @@ const concepts = [
             <span class="sum__name">{c.name}</span>
             <span class="sum__sub">{c.sub}</span>
           </div>
-          <div class="sum__prop">Слои E / I / S — {c.prop} · {c.tag}</div>
-          {c.id === 'nalichnik' && (
-            <>
-              <div class="sum__bar"><i style="flex:50;background:#33251a"></i><i style="flex:35;background:#a8823c"></i><i style="flex:15;background:#9b080e"></i></div>
-              <p class="sum__blurb">{c.blurb}</p>
-              <div class="sw"><span style="background:#f4ead8"></span><span style="background:#33251a"></span><span style="background:#a8823c"></span><span style="background:#9b080e"></span></div>
-            </>
-          )}
-          {c.id === 'utro' && (
-            <>
-              <div class="sum__bar"><i style="flex:55;background:#17140f"></i><i style="flex:15;background:#8a8377"></i><i style="flex:30;background:#9b080e"></i></div>
-              <p class="sum__blurb">{c.blurb}</p>
-              <div class="sw"><span style="background:#f2efe6"></span><span style="background:#17140f"></span><span style="background:#9b080e"></span><span style="background:#ffffff"></span></div>
-            </>
-          )}
-          {c.id === 'zoloto' && (
-            <>
-              <div class="sum__bar"><i style="flex:45;background:#171009"></i><i style="flex:45;background:#c6a25e"></i><i style="flex:10;background:#7a1518"></i></div>
-              <p class="sum__blurb">{c.blurb}</p>
-              <div class="sw"><span style="background:#171009"></span><span style="background:#c6a25e"></span><span style="background:#7a1518"></span><span style="background:#f3ead6"></span></div>
-            </>
-          )}
+          {c.id === 'chistoe' && (<div class="sw"><span style="background:#fbfaf7"></span><span style="background:#1f1c18"></span><span style="background:#9b080e"></span></div>)}
+          {c.id === 'nalichnik' && (<div class="sw"><span style="background:#f5ebd9"></span><span style="background:#2f2318"></span><span style="background:#b8893a"></span><span style="background:#9b080e"></span></div>)}
+          {c.id === 'zoloto' && (<div class="sw"><span style="background:#171009"></span><span style="background:#c6a25e"></span><span style="background:#7a1518"></span></div>)}
+          <p class="sum__blurb">{c.blurb}</p>
           <a class="jump" href={`#${c.id}`}>Смотреть вживую ↓</a>
         </article>
       ))}
     </section>
 
-    <!-- Живые полосы -->
     {concepts.map((c) => (
       <section class="band" id={c.id} data-c={c.id}>
         <div class="band__label">
           <span class="band__num">{c.n}</span>
           <span class="band__name">{c.name} · {c.sub}</span>
-          <span class="band__tag">{c.tag} · {c.prop}</span>
+          <span class="band__tag">{c.tag}</span>
         </div>
-        <div class="frame">
-          <!-- шапка -->
-          <div class="plate">
+
+        <div class="hero">
+          <img class="hero__img" src={heroImg} alt="Ряды винных бутылок в винном погребе" />
+          <div class="hero__scrim"></div>
+          <div class="hero__nav">
             <span class="logo" style={`--m:url(${logo})`} aria-label="Русский бренд"></span>
-            <span class="plate__x">×</span>
+            <span class="hero__x">×</span>
             <span class="smi2">СМИ<b>2</b></span>
-            <span class="plate__desc">Медиа о российских брендах: истории, интервью, обзоры</span>
           </div>
-
-          <!-- hero (вёрстка своя на концепт) -->
-          {c.id === 'nalichnik' && (
-            <div class="hero">
-              <div class="hero__frame"><img src={heroPhoto} alt="" loading="lazy" /></div>
-              <div>
-                <div class="eyebrow">{hero.cat}</div>
-                <h2 class="hero__title">{hero.title}</h2>
-                <p class="hero__lead">{hero.lead}</p>
-                <div class="hero__date" style="margin-top:14px">{hero.date}</div>
-              </div>
-            </div>
-          )}
-          {c.id === 'utro' && (
-            <div class="hero">
-              <div class="hero__text">
-                <div class="eyebrow">{hero.cat}</div>
-                <h2 class="hero__title">{hero.title}</h2>
-                <p class="hero__lead">{hero.lead}</p>
-                <div class="hero__date" style="margin-top:14px">{hero.date}</div>
-              </div>
-              <img class="hero__img" src={heroPhoto} alt="" loading="lazy" />
-            </div>
-          )}
-          {c.id === 'zoloto' && (
-            <div class="hero">
-              <div class="hero__inset"><img src={heroPhoto} alt="" loading="lazy" /></div>
-              <div class="eyebrow">{hero.cat}</div>
-              <h2 class="hero__title">{hero.title}</h2>
-              <p class="hero__lead">{hero.lead}</p>
-              <div class="hero__date" style="margin-top:14px">{hero.date}</div>
-            </div>
-          )}
-
-          <!-- делитель -->
-          <div class="rosette">
-            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-              <path d="M20 3c3 7 10 14 17 17-7 3-14 10-17 17-3-7-10-14-17-17 7-3 14-10 17-17Z" stroke="currentColor" stroke-width="1.2"/>
-              <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
+          <div class="hero__center">
+            <div class="hero__eyebrow">{hero.cat}</div>
+            <h2 class="hero__title">{hero.title}</h2>
+            <div class="hero__date">{hero.date}</div>
           </div>
+        </div>
 
-          <!-- лента карточек -->
-          <div class="grid">
-            {cards.map((a) => (
-              <article class="card">
-                <img class="card__img" src={a.cover} alt="" loading="lazy" />
-                <div class="card__body">
+        <div class="body">
+          <div class="body__col">
+            <div class="rosette">
+              <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="M20 3c3 7 10 14 17 17-7 3-14 10-17 17-3-7-10-14-17-17 7-3 14-10 17-17Z" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </div>
+            {body.map((p) => (<p>{p}</p>))}
+          </div>
+        </div>
+
+        <div class="also">
+          <div class="also__in">
+            <h3 class="also__h">Ещё по теме</h3>
+            <div class="grid">
+              {cards.map((a) => (
+                <article class="card">
+                  <img class="card__img" src={a.cover} alt="" loading="lazy" />
                   <span class="card__cat">{a.cat}</span>
-                  <h3 class="card__title">{a.title}</h3>
+                  <h4 class="card__title">{a.title}</h4>
                   <div class="card__date">{a.date}</div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
     ))}
 
     <footer style="max-width:1100px;margin:0 auto;padding:40px 24px 72px;color:#8a8278;font-size:13px">
-      Русский бренд · v2 · черновик направлений для выбора заказчиком. Логотип и палитра — утверждённые.
+      Русский бренд · v2 · тональные вариации утверждённого макета для выбора заказчиком.
     </footer>
   </body>
 </html>
